@@ -1,7 +1,25 @@
 from django.contrib import admin
 from django.utils.html import format_html
-from .models import Category, Publisher, Author, Book, BookItem
+from .models import Category, Publisher, Author, Book, BookItem , Laptop ,LaptopItem ,Manufacture
 
+
+
+class LaptopAdmin(admin.ModelAdmin):
+    list_display = ['name', 'screen', 'model']
+    search_fields = ['name', 'room']
+class LaptopItemAdmin(admin.ModelAdmin):
+    def image_view(self, obj):
+        return format_html('<img src="{}" width="200" height="200" />'.format(obj.image.url))
+    
+    def laptop_name(self, obj):
+        return obj.laptop.name
+    
+    image_view.short_description = 'IMAGE'
+    laptop_name.short_description = 'NAME'
+    list_display = ['image_view', 'laptop_name', 'price', 'discount']
+
+class ManufactureAdmin(admin.ModelAdmin):
+    list_display = ['name', 'address', 'phone','email']
 
 class AuthorAdmin(admin.ModelAdmin):
     list_display = ['name', 'address', 'biography']
@@ -15,7 +33,6 @@ class CategoryAdmin(admin.ModelAdmin):
 class BookAdmin(admin.ModelAdmin):
     list_display = ['name', 'language', 'summary']
     search_fields = ['name', 'language']
-
 class BookItemAdmin(admin.ModelAdmin):
     def image_view(self, obj):
         return format_html('<img src="{}" width="200" height="200" />'.format(obj.image.url))
@@ -33,3 +50,6 @@ admin.site.register(Publisher, PublisherAdmin)
 admin.site.register(Category, CategoryAdmin)
 admin.site.register(Book, BookAdmin)
 admin.site.register(BookItem, BookItemAdmin)
+admin.site.register(Laptop, LaptopAdmin)
+admin.site.register(LaptopItem, LaptopItemAdmin)
+admin.site.register(Manufacture, ManufactureAdmin)
