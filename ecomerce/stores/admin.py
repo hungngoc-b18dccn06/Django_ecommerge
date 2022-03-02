@@ -1,10 +1,27 @@
 from django.contrib import admin
 from django.utils.html import format_html
-from .models import Category, Publisher, Author, Book, BookItem , Laptop ,LaptopItem ,Manufacture
+from .models import Category, Publisher, Author, Book, BookItem , Laptop ,LaptopItem ,Manufacture, Clothes, Clothes_manufacture, ClothesItem
 
 from django.contrib import admin
 from django.utils.html import format_html
 from .models import Category, Publisher, Author, Book, BookItem , Mobilephone, Mobilephone_item, Mobilephone_manufacture
+
+class ClothesAdmin(admin.ModelAdmin):
+    list_display = ['name', 'color', 'gender', 'material']
+
+class Clothes_manufactureAdmin(admin.ModelAdmin):
+    list_display = ['name', 'address', 'phone']
+class ClothesItemAdmin(admin.ModelAdmin):
+
+    def image_view(self, obj):
+        return format_html('<img src="{}" width="200" height="200" />'.format(obj.image.url))
+    
+    def clothes_name(self, obj):
+        return obj.clothes.name
+    
+    image_view.short_description = 'IMAGE'
+    clothes_name.short_description = 'NAME'
+    list_display = ['image_view', 'clothes_name', 'price', 'discount']
 
 class MobilephoneAdmin(admin.ModelAdmin):
     list_display = ['name', 'screen', 'model', 'ram']
