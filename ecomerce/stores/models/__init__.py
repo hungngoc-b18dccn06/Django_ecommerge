@@ -12,3 +12,7 @@ from .laptop.laptop import Laptop
 from .laptop.laptop_item import LaptopItem
 from .laptop.manufacture import Manufacture
 
+from .clothes.clothes_manufacture import Clothes_manufacture
+from .clothes.clothes_item import ClothesItem
+from .clothes.clothes import Clothes
+
