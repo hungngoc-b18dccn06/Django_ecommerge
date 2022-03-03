@@ -1,21 +1,25 @@
 from django.db import models
 from django.urls import reverse
 
-from .clothes_manufacture import Clothes_manufacture
+from .clothes_manufacture import ClothesManufacture
 
 class Clothes(models.Model):
 
-      name = models.CharField(max_length=50)
-      color = models.CharField(max_length=20)
-      age = models.CharField(max_length=20)
-      gender = models.CharField(max_length=20)
-      material = models.CharField(max_length=50)
+    name = models.CharField(max_length=50)
+    color = models.CharField(max_length=20)
+    age = models.CharField(max_length=20)
+    gender = models.CharField(max_length=20)
+    material = models.CharField(max_length=50)
 
-      clothes_manufacture= models.ManyToManyField(Clothes_manufacture,)
+    clothes_manufacture= models.ForeignKey(
+        ClothesManufacture,
+        null=True,
+        on_delete=models.CASCADE,
+    )
 
-def __str__(self):
-    return self.name
+    def __str__(self):
+        return self.name
 
-def get_absolute_url(self):
+    def get_absolute_url(self):
         return reverse('clothes-detail', args=[str(self.id)])
 

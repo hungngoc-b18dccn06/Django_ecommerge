@@ -1,15 +1,20 @@
 from django.db import models
 from django.urls import reverse
-from .manufacture import Manufacture
+from .laptop_manufacture import LaptopManufacture
 
 
 class Laptop(models.Model):
     name = models.CharField(max_length=200)
-    ram = models.IntegerField()
-    screen = models.TextField(max_length=500)
-    model = models.TextField(max_length=20, unique=True)
+    ram = models.CharField(max_length=20)
+    screen = models.CharField(max_length=500)
+    model = models.CharField(max_length=20, unique=True)
 
-    manufacture = models.ManyToManyField(Manufacture,)
+    laptop_manufacture= models.ForeignKey(
+        LaptopManufacture,
+        null=True,
+        on_delete=models.CASCADE,
+    )
+    
     def __str__(self):
         return self.name
 

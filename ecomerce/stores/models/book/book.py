@@ -28,8 +28,8 @@ class Book(models.Model):
         on_delete=models.CASCADE,
     )
 
-    category = models.ManyToManyField(Category,)
-    author = models.ManyToManyField(Author,)
+    categories = models.ManyToManyField(Category,)
+    authors = models.ManyToManyField(Author,)
 
     def __str__(self):
         return self.name

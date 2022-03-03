@@ -10,4 +10,5 @@ class LaptopItem(models.Model):
 
     price = models.FloatField()
     discount = models.CharField(max_length=4)
-    image = models.ImageField(upload_to = 'uploads/images/book_items/')
+    image = models.ImageField(upload_to = 'uploads/images/laptop_items/')
+
