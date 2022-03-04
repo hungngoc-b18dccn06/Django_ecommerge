@@ -75,3 +75,27 @@ admin.site.register(Author, AuthorAdmin)
 admin.site.register(Publisher, PublisherAdmin)
 admin.site.register(Genre, GenreAdmin)
 admin.site.register(Book, BookAdmin)
+
+# CLOTHES
+class ClothesAdmin(admin.ModelAdmin):
+    def clothes_name(self, obj):
+        return obj.product.name
+    list_display = ['clothes_name', 'color', 'age', 'gender', 'material']
+
+admin.site.register(Clothes, ClothesAdmin)
+
+# LAPTOP
+class LaptopAdmin(admin.ModelAdmin):
+    def laptop_name(self, obj):
+        return obj.product.name
+    list_display = ['laptop_name', 'rom', 'ram', 'screen',]
+
+admin.site.register(Laptop, LaptopAdmin)
+
+# MOBILE PHONE
+class MobilePhoneAdmin(admin.ModelAdmin):
+    def mobile_phone_name(self, obj):
+        return obj.product.name
+    list_display = ['mobile_phone_name', 'rom', 'ram', 'screen',]
+
+admin.site.register(MobilePhone, MobilePhoneAdmin)
