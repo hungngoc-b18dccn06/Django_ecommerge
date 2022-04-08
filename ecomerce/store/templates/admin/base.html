@@ -1,0 +1,20 @@
+{% extends 'admin/base.html' %}
+
+{% block extrastyle %}{{ block.super }}
+{% if not request.user.is_superuser %}
+<style>
+#nav-sidebar {
+    display: none;
+}
+.dashboard .model-supplier {
+    display: none;
+}
+.dashboard .model-category {
+    display: none;
+}
+.dashboard .model-product {
+    display: none;
+} 
+</style>
+{% endif %}
+{% endblock %}

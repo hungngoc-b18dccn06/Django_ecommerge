@@ -13,10 +13,8 @@ from .models.product.book.genre import Genre
 
 from .models.product.clothes.clothes import Clothes
 
-from .models.product.mobile_phone.mobile_phone import MobilePhone
-
 from .models.product.laptop.laptop import Laptop 
-
+from .models.product.mobile_phone.mobile_phone import MobilePhone
 # CATEGORY
 class CategoryAdmin(admin.ModelAdmin):
     list_display = ['name', 'description',]
@@ -31,13 +29,11 @@ admin.site.register(Supplier, SupplierAdmin)
 
 # PRODUCT
 class ProductAdmin(admin.ModelAdmin):
-    def supplier_name(self, obj):
-        return obj.supplier.name
-    
+ 
     def category_name(self, obj):
         return obj.category.name
 
-    list_display = ['name', 'supplier_name', 'category_name']
+    list_display = ['name', 'category_name']
 
 admin.site.register(Product, ProductAdmin)
 
@@ -58,7 +54,7 @@ class BookAdmin(admin.ModelAdmin):
     def book_name(self, obj):
         return obj.product.name 
 
-    list_display = ['book_name', 'language', 'summary']
+    list_display = ['book_name', 'language', 'summary'] 
     search_fields = ['language',]
     filter_horizontal = ['authors', 'genres']
 
@@ -70,6 +66,32 @@ class PublisherAdmin(admin.ModelAdmin):
 
 class GenreAdmin(admin.ModelAdmin):
     list_display = ['name', 'age_range', 'description'] 
+
+# CLOTHES
+class ClothesAdmin(admin.ModelAdmin):
+    def clothes_name(self, obj):
+        return obj.product.name
+    list_display = ['clothes_name', 'color', 'age', 'gender', 'material']
+
+admin.site.register(Clothes, ClothesAdmin)
+
+# LAPTOP
+class LaptopAdmin(admin.ModelAdmin):
+    def laptop_name(self, obj):
+        return obj.product.name
+    list_display = ['laptop_name', 'rom', 'ram', 'screen',]
+    
+    
+# MOBILE PHONE
+class MobilePhoneAdmin(admin.ModelAdmin):
+    def mobile_phone_name(self, obj):
+        return obj.product.name
+    list_display = ['mobile_phone_name', 'rom', 'ram', 'screen',]
+   
+
+admin.site.register(MobilePhone, MobilePhoneAdmin)    
+
+admin.site.register(Laptop, LaptopAdmin)
 
 admin.site.register(Author, AuthorAdmin)
 admin.site.register(Publisher, PublisherAdmin)
